@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#050314" />
+  <link rel="icon" href="data:," />
+
+  <title>Space Runner</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="./css/global.css" />
+  <link rel="stylesheet" href="./css/games.css" />
+  <link rel="stylesheet" href="./css/space_runner.css" />
+  <link rel="stylesheet" href="./css/standalone.css" />
+</head>
+
+<body>
+  <main class="games">
+    <header class="games__header">
+      <h1 class="games__title">
+        SPACE <span>RUNNER</span>
+      </h1>
+
+      <p class="games__sub">
+        SURVIVE. DEFEAT THE BOSSES. REACH THE PORTAL.
+      </p>
+    </header>
+
+    <section class="game-layout space-runner-layout" aria-label="Space Runner game">
+      <div class="game-hud" aria-live="polite">
+        <span>SCORE: <strong id="score">0</strong></span>
+        <span>LEVEL: <strong id="level">1</strong></span>
+      </div>
+
+      <div class="canvas-wrap">
+        <canvas
+          id="gameCanvas"
+          width="800"
+          height="500"
+          aria-label="Space Runner play area"
+        ></canvas>
+
+        <section
+          id="victoryCredits"
+          class="victory-credits"
+          aria-label="End credits and final statistics"
+          hidden
+        >
+          <div class="victory-credits__panel">
+            <div class="victory-credit victory-credit--1">
+              <span>GAME BY</span>
+              <strong>@dyoh_9</strong>
+            </div>
+
+            <div class="victory-credit victory-credit--2">
+              <span>VISUALS &amp; ANIMATION</span>
+              <strong>@dyoh_9</strong>
+            </div>
+
+            <div class="victory-credit victory-credit--3">
+              <span>MUSIC</span>
+              <p>Main theme — inspired by vivivivivi</p>
+              <p>Credits Song for My Death</p>
+              <small>Modified with Audacity</small>
+              <p class="victory-credit__spaced">Boss theme — OpenGameArt</p>
+              <small>Modified with Audacity</small>
+            </div>
+
+            <div class="victory-credit victory-credit--4">
+              <span>SOUND EFFECTS</span>
+              <p>Pixabay — modified with Audacity</p>
+            </div>
+
+            <p class="victory-thanks victory-credit--5">
+              THANK YOU FOR PLAYING
+            </p>
+          </div>
+
+          <div class="victory-results victory-credit--6">
+            <span>FINAL SCORE <strong id="victoryFinalScore">0</strong></span>
+            <span>ACCURACY <strong id="victoryAccuracy">0%</strong></span>
+          </div>
+        </section>
+      </div>
+
+      <p id="gameMessage" class="status-text" aria-live="polite">
+        PRESS START
+      </p>
+
+      <div class="game-actions">
+        <button
+          id="startBtn"
+          class="game-card__btn game-card__btn--play"
+          type="button"
+        >
+          START
+        </button>
+
+        <button
+          id="expandBtn"
+          class="game-card__btn game-card__btn--board"
+          type="button"
+        >
+          EXPAND
+        </button>
+
+        <button
+          id="keybindsBtn"
+          class="game-card__btn game-card__btn--board"
+          type="button"
+          aria-expanded="false"
+          aria-controls="keybindsPanel"
+        >
+          KEYBINDS
+        </button>
+
+        <button
+          id="retryBtn"
+          class="game-card__btn game-card__btn--play"
+          type="button"
+          hidden
+        >
+          RETRY
+        </button>
+
+        <button
+          id="exitExpandBtn"
+          class="game-card__btn game-card__btn--board"
+          type="button"
+          hidden
+        >
+          BACK
+        </button>
+      </div>
+
+      <section id="keybindsPanel" class="keybinds-panel" aria-label="Keyboard controls" hidden>
+        <h2>KEYBINDS</h2>
+        <div class="keybinds-grid">
+          <div class="keybind-row">
+            <span><kbd>Z</kbd><span class="keybind-alt">/</span><kbd>W</kbd><span class="keybind-alt">or</span><kbd>↑</kbd></span>
+            <strong>MOVE UP</strong>
+          </div>
+          <div class="keybind-row">
+            <span><kbd>S</kbd><span class="keybind-alt">or</span><kbd>↓</kbd></span>
+            <strong>MOVE DOWN</strong>
+          </div>
+          <div class="keybind-row">
+            <span><kbd>Q</kbd><span class="keybind-alt">/</span><kbd>A</kbd><span class="keybind-alt">or</span><kbd>←</kbd></span>
+            <strong>MOVE LEFT</strong>
+          </div>
+          <div class="keybind-row">
+            <span><kbd>D</kbd><span class="keybind-alt">or</span><kbd>→</kbd></span>
+            <strong>MOVE RIGHT</strong>
+          </div>
+          <div class="keybind-row">
+            <span><kbd class="key-wide">SPACE</kbd></span>
+            <strong>SHOOT</strong>
+          </div>
+          <div class="keybind-row">
+            <span><kbd>P</kbd></span>
+            <strong>PAUSE</strong>
+          </div>
+        </div>
+      </section>
+
+      <p class="game-controls">
+        AZERTY + QWERTY · ARROW KEYS · SPACE TO SHOOT · P TO PAUSE
+      </p>
+    </section>
+  </main>
+
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>
