@@ -42,6 +42,9 @@ export class Game {
     this.intro = new Intro(this.canvas, this.background);
     this.introActive = false;
     this.lastFrameTime = null;
+    this.simulationStep = 1000 / 120;
+    this.simulationAccumulator = 0;
+    this.maxSimulationSteps = 8;
 
     this.finalBossBackground = new FinalBossBackground();
     this.lastDragonPhase = 1;
@@ -235,6 +238,7 @@ this.frameCount = DEV_MODE
     cancelAnimationFrame(this.animationId);
 
     this.lastFrameTime = null;
+    this.simulationAccumulator = 0;
     this.shootSoundCooldown = 0;
 
     if (!this.introActive) {
@@ -670,13 +674,30 @@ this.frameCount = DEV_MODE
     this.lastFrameTime = now;
 
     if (this.introActive) {
+      this.simulationAccumulator = 0;
       this.intro.update(deltaTime);
 
       if (this.intro.finished) {
         this.finishIntro();
       }
     } else {
-      this.update();
+      this.simulationAccumulator += deltaTime;
+
+      let simulationSteps = 0;
+
+      while (
+        this.simulationAccumulator >= this.simulationStep &&
+        simulationSteps < this.maxSimulationSteps
+      ) {
+        this.update();
+        this.simulationAccumulator -= this.simulationStep;
+        simulationSteps++;
+      }
+
+      // Drop an excessive backlog instead of entering a catch-up spiral.
+      if (simulationSteps === this.maxSimulationSteps) {
+        this.simulationAccumulator = 0;
+      }
     }
 
     this.draw();
